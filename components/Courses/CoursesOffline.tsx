@@ -1,4 +1,4 @@
-import kursData from "./coursesDataOn";
+import coursesDataOn from "./coursesDataOn";
 import SingleKurs from "./SingleCourseOn";
 
 const OfflineCourses = () => {
@@ -67,12 +67,12 @@ const OfflineCourses = () => {
           </p>
         </div>
         <div className="-mx-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3 ">
-          {kursData.map((kurs) => (
+          {coursesDataOn.map((course) => (
             <div
-              key={kurs.id}
+              key={course.id}
               className="w-full px-4 md:w-2/3 lg:w-1/2 xl:w-1/3 "
             >
-              <SingleKurs blog={kurs} />
+              <SingleKurs course={course} />
             </div>
           ))}
         </div>
