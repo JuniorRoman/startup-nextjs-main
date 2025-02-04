@@ -126,7 +126,7 @@ export default function Details({ params }: { params: { id: string } }) {
                   </h3>
                   <ul className="mb-10 list-inside list-disc text-body-color">
                     {course.benefits.map((benefit) => (
-                      <li className="mb-2 text-base font-medium text-body-color">
+                      <li className="mb-2 text-base font-medium text-body-color" key={benefit.id}>
                         <strong>{benefit.title}</strong> {benefit.description}
                       </li>
                     ))}
