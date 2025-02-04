@@ -345,7 +345,7 @@ export default function Details({ params }: { params: { id: string } }) {
                 </h3>
                 <ul className="p-8">
                   {course.sidebar.information.map((info) => (
-                    <li className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10">
+                    <li className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10" key={info.name}>
                       <span className="mr-2 flex">
                         <Image
                           src={info.image}
