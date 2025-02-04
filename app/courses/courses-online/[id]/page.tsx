@@ -132,7 +132,7 @@ export default function Details({ params }: { params: { id: string } }) {
                     ))}
                   </ul>
                   {course.desc.map((desc) => (
-                    <p className="mb-5 text-base leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+                    <p className="mb-5 text-base leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed" key={desc.id}>
                       {desc.paragraph}
                     </p>
                   ))}
