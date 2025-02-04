@@ -100,7 +100,7 @@ const handleArrayChange = (e, arrayName, index) => {
     <>
       <div className="container">
         <div className="mb-5 mt-20 flex items-center justify-center">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="w-full">
             <div className="flex flex-col">
               <label>Назва курсу</label>
               <input
