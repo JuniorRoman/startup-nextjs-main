@@ -1,0 +1,33 @@
+.marqueeContainer {
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.marqueeContent {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 180s linear infinite;
+}
+
+.marqueeItem {
+  display: inline-block;
+  margin-right: 2.5rem;
+  /* Tailwind клас mr-10 */
+}
+
+.brandImage {
+  height: 6rem;
+  /* Tailwind клас h-24 */
+  object-fit: contain;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
