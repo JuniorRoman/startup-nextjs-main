@@ -126,13 +126,19 @@ export default function Details({ params }: { params: { id: string } }) {
                   </h3>
                   <ul className="mb-10 list-inside list-disc text-body-color">
                     {course.benefits.map((benefit) => (
-                      <li className="mb-2 text-base font-medium text-body-color" key={benefit.id}>
+                      <li
+                        className="mb-2 text-base font-medium text-body-color"
+                        key={benefit.id}
+                      >
                         <strong>{benefit.title}</strong> {benefit.description}
                       </li>
                     ))}
                   </ul>
                   {course.desc.map((desc) => (
-                    <p className="mb-5 text-base leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed" key={desc.id}>
+                    <p
+                      className="mb-5 text-base leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed"
+                      key={desc.id}
+                    >
                       {desc.paragraph}
                     </p>
                   ))}
@@ -373,7 +379,10 @@ export default function Details({ params }: { params: { id: string } }) {
                 </h3>
                 <ul className="p-8">
                   {course.sidebar.information.map((info) => (
-                    <li className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10">
+                    <li
+                      className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10"
+                      key={info.name}
+                    >
                       <span className="mr-2 flex">
                         <Image
                           src={info.image}
