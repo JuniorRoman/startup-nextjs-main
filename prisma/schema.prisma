@@ -1,0 +1,70 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Course {
+  id                  String   @id @default(uuid())
+  title               String
+  subtitle            String?
+  subtitledetail      String?
+  paragraph           String?
+  benefitstitle       String?
+  benefits            Benefit[]
+  suitableFor         SuitableFor[]
+  desc                Description[]
+  actualcourse        String?
+  data                DateTime?
+  publishDate         DateTime?
+  sidebarTitle        String?
+  sidebarPrice        Float?
+  sidebarDescription  SidebarDescription[]
+  sidebarInformation  SidebarInformation[]
+  authorName          String?
+  authorImage         String?
+  authorDesignation   String?
+  authorTags          String[]
+  image               String?
+}
+
+model Benefit {
+  id          String @id @default(uuid())
+  courseId    String
+  course      Course @relation(fields: [courseId], references: [id])
+  title       String
+  description String
+}
+
+model SuitableFor {
+  id        String @id @default(uuid())
+  courseId  String
+  course    Course @relation(fields: [courseId], references: [id])
+  paragraph String
+}
+
+model Description {
+  id        String @id @default(uuid())
+  courseId  String
+  course    Course @relation(fields: [courseId], references: [id])
+  paragraph String
+}
+
+model SidebarDescription {
+  id        String @id @default(uuid())
+  courseId  String
+  course    Course @relation(fields: [courseId], references: [id])
+  paragraph String
+}
+
+model SidebarInformation {
+  id        String @id @default(uuid())
+  courseId  String
+  course    Course @relation(fields: [courseId], references: [id])
+  name      String
+  quantity  String
+  image     String
+}

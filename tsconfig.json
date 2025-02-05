@@ -29,6 +29,6 @@
     "**/*.ts",
     "**/*.tsx",
     "app/courses-online/[id].js"
-, "app/api/courses/route.js"  ],
+, "app/api/courses/route.js", "lib/prisma.ts"  ],
   "exclude": ["node_modules"]
 }

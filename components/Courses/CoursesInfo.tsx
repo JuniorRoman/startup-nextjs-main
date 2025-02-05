@@ -8,7 +8,7 @@ const OnlineCourses = () => {
   };
   return (
     <div className="container mt-20">
-      <div className=" flex flex-col w-full items-center  justify-center px-4 py-4 text-gray-800 dark:text-white shadow-2xl">
+      <div className=" flex flex-col w-full items-center  justify-center px-8 py-4 text-gray-800 dark:text-white dark:bg-gray-800 shadow-2xl">
         <div
           className={`text-base leading-relaxed md:text-lg ${
             isExpanded ? "" : "line-clamp-3"

@@ -25,13 +25,12 @@ const CourseForm = () => {
     image: "",
   });
 
-
-const handleArrayChange = (e, arrayName, index) => {
-  const { name, value } = e.target;
-  const updatedArray = [...course[arrayName]];
-  updatedArray[index] = { ...updatedArray[index], [name]: value };
-  setCourse((prev) => ({ ...prev, [arrayName]: updatedArray }));
-};
+  const handleArrayChange = (e, arrayName, index) => {
+    const { name, value } = e.target;
+    const updatedArray = [...course[arrayName]];
+    updatedArray[index] = { ...updatedArray[index], [name]: value };
+    setCourse((prev) => ({ ...prev, [arrayName]: updatedArray }));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,36 +40,47 @@ const handleArrayChange = (e, arrayName, index) => {
     });
   };
 
-   const addBenefit = () => {
-     setCourse((prev) => ({
-       ...prev,
-       benefits: [...prev.benefits, { title: "", description: "" }],
-     }));
+  const addBenefit = () => {
+    setCourse((prev) => ({
+      ...prev,
+      benefits: [...prev.benefits, { title: "", description: "" }],
+    }));
   };
-  
-   const addSuitableFor = () => {
-     setCourse((prev) => ({
-       ...prev,
-       suitableFor: [...prev.suitableFor, { paragraph: "" }],
-     }));
-  };
-  
-   const addDesc = () => {
-     setCourse((prev) => ({
-       ...prev,
-       desc: [...prev.desc, { paragraph: "" }],
-     }));
-   };
 
-   const addSidebarInfo = () => {
-     setCourse((prev) => ({
-       ...prev,
-       sidebarInformation: [
-         ...prev.sidebarInformation,
-         { name: "", quantity: "", image: "" },
-       ],
-     }));
-   };
+  const addSuitableFor = () => {
+    setCourse((prev) => ({
+      ...prev,
+      suitableFor: [...prev.suitableFor, { paragraph: "" }],
+    }));
+  };
+
+  const addDesc = () => {
+    setCourse((prev) => ({
+      ...prev,
+      desc: [...prev.desc, { paragraph: "" }],
+    }));
+  };
+
+  const addSidebarInfo = () => {
+    setCourse((prev) => ({
+      ...prev,
+      sidebarInformation: [
+        ...prev.sidebarInformation,
+        { name: "", quantity: "", image: "" },
+      ],
+    }));
+  };
+
+  const addSidebarDescription = () => {
+    setCourse((prev) => ({
+      ...prev,
+      sidebarDescription: [
+        ...prev.sidebarDescription,
+        { paragraph: "" },
+      ],    
+    }));
+  };
+      
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,9 +109,9 @@ const handleArrayChange = (e, arrayName, index) => {
   return (
     <>
       <div className="container">
-        <div className="mb-5 mt-20 flex items-center justify-center">
+        <div className="mb-5 mt-20 flex max-w-4xl items-center justify-center">
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Назва курсу</label>
               <input
                 type="text"
@@ -109,60 +119,68 @@ const handleArrayChange = (e, arrayName, index) => {
                 value={course.title}
                 onChange={handleChange}
                 required
-                className="border border-gray-300 p-2"
+                className="mt-2 border border-gray-500 p-2"
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Підзаголовок</label>
               <input
                 type="text"
                 name="subtitle"
                 value={course.subtitle}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 border border-gray-500 p-2"
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Деталі підзаголовку</label>
               <input
                 type="text"
                 name="subtitledetail"
                 value={course.subtitledetail}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 border border-gray-500 p-2"
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Опис курсу</label>
               <textarea
                 name="paragraph"
                 value={course.paragraph}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 border border-gray-500 p-2"
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Переваги курсу</label>
+              <input
+                type="text"
+                name="benefitstitle"
+                value={course.benefitstitle}
+                placeholder="Заголовок переваги"
+                onChange={handleChange}
+                className=" my-3 border border-gray-500 p-2"
+              />
               {course.benefits.map((benefit, index) => (
-                <div key={index} className="flex flex-col">
+                <div key={index} className="mb-3 flex flex-col">
                   <input
                     type="text"
                     name="title"
                     value={benefit.title}
                     placeholder="Назва переваги"
                     onChange={(e) => handleArrayChange(e, "benefits", index)}
-                    className="mb-3 border border-gray-300 p-2"
+                    className="mb-3 border border-gray-500 p-2"
                   />
                   <textarea
                     name="description"
                     value={benefit.description}
                     placeholder="Опис переваги"
                     onChange={(e) => handleArrayChange(e, "benefits", index)}
-                    className="border border-gray-300 p-2"
+                    className="border border-gray-500 p-2"
                   />
                 </div>
               ))}
@@ -175,8 +193,9 @@ const handleArrayChange = (e, arrayName, index) => {
               </button>
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Кому підходить цей курс</label>
+
               {course.suitableFor.map((item, index) => (
                 <div key={index}>
                   <textarea
@@ -184,7 +203,7 @@ const handleArrayChange = (e, arrayName, index) => {
                     value={item.paragraph}
                     placeholder="Опис підходящої аудиторії"
                     onChange={(e) => handleArrayChange(e, "suitableFor", index)}
-                    className="border border-gray-300 p-2"
+                    className="mt-2 w-[50%] border border-gray-500 p-2"
                   />
                 </div>
               ))}
@@ -197,7 +216,7 @@ const handleArrayChange = (e, arrayName, index) => {
               </button>
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mb-3 mt-5 flex flex-col">
               <label>Додатковий опис курсу</label>
               {course.desc.map((item, index) => (
                 <div key={index}>
@@ -206,78 +225,96 @@ const handleArrayChange = (e, arrayName, index) => {
                     value={item.paragraph}
                     placeholder="Опис курсу"
                     onChange={(e) => handleArrayChange(e, "desc", index)}
-                    className="border border-gray-300 p-2"
+                    className="w-[50%] border border-gray-500 p-2"
                   />
                 </div>
               ))}
-              <button type="button" onClick={addDesc}>
+              <button
+                className="mt-2 bg-primary py-2"
+                type="button"
+                onClick={addDesc}
+              >
                 Додати опис
               </button>
             </div>
 
-            <div className="flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Актуальність курсу</label>
               <input
                 type="text"
                 name="actualcourse"
                 value={course.actualcourse}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className=" mt-2 border border-gray-500 p-2"
               />
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Дата</label>
               <input
                 type="date"
                 name="data"
                 value={course.data}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 w-[300px] border border-gray-500 p-2"
               />
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mb-3 flex flex-col">
               <label>Дата публікації</label>
               <input
                 type="date"
                 name="publishDate"
                 value={course.publishDate}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 w-[300px] border border-gray-500 p-2"
               />
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mb-3 flex flex-col">
+              <label>Заголовок вартості</label>
+              <input
+                type="text"
+                name="sidebarTitle"
+                value={course.sidebarTitle}
+                onChange={handleChange}
+                className="mt-2 w-[300px] border border-gray-500 p-2"
+              />
+            </div>
+            <div className="mb-3 flex flex-col">
               <label>Вартість</label>
               <input
                 type="number"
                 name="sidebarPrice"
                 value={course.sidebarPrice}
                 onChange={handleChange}
-                className="border border-gray-300 p-2"
+                className="mt-2 w-[300px] border border-gray-500 p-2"
               />
             </div>
 
             <div className="mt-5 flex flex-col">
               <label>Опис вартості</label>
-              {course.sidebarDescription.map((desc, index) => (
+              {course.sidebarDescription.map((item, index) => (
                 <div key={index}>
                   <input
                     type="text"
-                    value={desc}
-                    onChange={(e) => {
-                      const updatedDescription = [...course.sidebarDescription];
-                      updatedDescription[index] = e.target.value;
-                      setCourse((prev) => ({
-                        ...prev,
-                        sidebarDescription: updatedDescription,
-                      }));
-                    }}
-                    className="border border-gray-300 p-2"
+                    name="paragraph"
+                    value={item.paragraph}
+                    placeholder="Опис підходящої аудиторії"
+                    onChange={(e) =>
+                      handleArrayChange(e, "sidebarDescription", index)
+                    }
+                    className="mt-2 w-[50%] border border-gray-500 p-2"
                   />
                 </div>
               ))}
+              <button
+                className="mt-2 bg-primary py-2"
+                type="button"
+                onClick={addSidebarDescription}
+              >
+                Додати Опис вартості
+              </button>
             </div>
 
             <div className="mt-5 flex flex-col">

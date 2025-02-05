@@ -1,17 +1,16 @@
-import coursesData from "@/components/Courses/coursesDataOff";
 import Image from "next/image";
 import TagButton from "@/components/Blog/TagButton";
 import SharePost from "@/components/Blog/SharePost";
 import OfferList from "@/components/Pricing/OfferList";
 import PricingBox from "@/components/Pricing/PricingBox";
 import Suitable from "@/components/Courses/SuitableOffline";
+import coursesData from "@/components/Courses/coursesDataOff";
 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Page | Free Next.js Template for Startup and SaaS",
-  description: "This is About Page for Startup Nextjs Template",
-  // other metadata
+  title: "Сторінка курсів-офлайн ",
+  description: "Опис курсу - офлайн та його переваги",
 };
 
 

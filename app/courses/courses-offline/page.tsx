@@ -1,14 +1,13 @@
-import SingleKurs from "@/components/Courses/SingleCourseOff";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 
 import { Metadata } from "next";
 import OnlineCourses from "@/components/Courses/CoursesInfo";
 import coursesDataOff from "@/components/Courses/coursesDataOff";
+import SingleCourse from "@/components/Courses/SingleCourseOff";
 
 export const metadata: Metadata = {
-  title: "Blog Page | Free Next.js Template for Startup and SaaS",
-  description: "This is Blog Page for Startup Nextjs Template",
-  // other metadata
+  title: "Courses Page | Free Next.js Template for Startup and SaaS",
+  description: "Сторінка курсів-офлайн",
 };
 
 const Courses = () => {
@@ -16,7 +15,7 @@ const Courses = () => {
     <>
       <Breadcrumb
         pageName="Kursy-Offline"
-        description="Zapisz się i Dodaj do koszyka, aby rozpocząć kurs."
+        description="Запрошуємо всих бажаючих отримати професію за короткий термін"
       />
 
       <section className="pb-[120px] pt-[80px]">
@@ -37,12 +36,12 @@ const Courses = () => {
                 key={cours.id}
                 className="w-full px-4 md:w-2/3 lg:w-1/2 xl:w-1/3"
               >
-                <SingleKurs course={cours} />
+                <SingleCourse course={cours} />
               </div>
             ))}
           </div>
-          <OnlineCourses />
         </div>
+          <OnlineCourses />
       </section>
     </>
   );
