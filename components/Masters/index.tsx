@@ -43,14 +43,10 @@ const TeamCarousel = () => {
       <div className="container">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div
-              className="wow fadeInUp mx-auto  overflow-hidden rounded-md"
-              data-wow-delay=".15s"
-            >
+            <div className="mx-auto  overflow-hidden rounded-md">
               <div className="relative  items-center justify-center">
-                <div className="container mx-auto px-4 py-8">
-                  <div className="wow fadeInUp mb-5 text-center">
-                    <h2 className="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">
+                  <div className="mb-10 text-center">
+                    <h2 className="mb-4 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">
                       Nasz sympatyczny zespół
                     </h2>
                     <p className="text-base !leading-relaxed text-body-color md:text-lg">
@@ -60,34 +56,33 @@ const TeamCarousel = () => {
                   </div>
                   <Slider {...settings}>
                     {slides.map((slide, index) => (
-                      <div key={index} className="px-2">
-                        <div className="flex w-full flex-col items-center justify-center gap-1 rounded-xl border border-solid border-slate-600  [box-shadow:rgb(255,_255,_255)_6px_6px]">
+                      <div key={index} className="px-2 ">
+                        <div className="flex  w-full flex-col items-center justify-center gap-1 rounded-xl border-2 border-indigo-500 bg-white">
                           <div className="carousel__item">
                             <Image
                               src={slide.image}
                               alt="Image"
                               width={650}
                               height={200}
-                              className="h-96 w-100 object-cover rounded-xl"
+                              className="w-100 h-96 rounded-t-xl object-cover"
                             />
                           </div>
-                          <div className="p-4 text-center">
+                          <div className="p-4 text-center text-gray-800">
                             <h3 className="text-xl font-bold">{slide.title}</h3>
-                            <p className="mt-2 text-gray-600">{slide.desc}</p>
+                            <p className="mt-2">{slide.desc}</p>
                           </div>
                         </div>
                       </div>
                     ))}
                   </Slider>
                   <div className="absolute bottom-0 left-0 right-0 z-[-1] h-full w-full bg-[url(/images/video/shape.svg)] bg-cover bg-center bg-no-repeat"></div>
-                </div>
               </div>
+      <div className="absolute bottom-0 left-0 right-0 z-[-1] h-full w-full bg-[url(/images/video/shape.svg)] bg-cover bg-center bg-no-repeat"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-[-1] h-full w-full bg-[url(/images/video/shape.svg)] bg-cover bg-center bg-no-repeat"></div>
     </section>
   );
 };

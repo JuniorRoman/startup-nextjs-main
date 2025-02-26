@@ -8,13 +8,14 @@ const Brands = () => {
   const [repeatedBrands, setRepeatedBrands] = useState([]);
 
   useEffect(() => {
-    // Повторюємо зображення кілька разів для плавності
     setRepeatedBrands(Array(10).fill(brandsData).flat());
   }, []);
   return (
     <section className="pt-16">
       <div className="container">
-        <div className={`${styles.marqueeContainer} bg-gray-100`}>
+        <div
+          className={`${styles.marqueeContainer} bg-gradient-to-r from-fuchsia-500 to-cyan-500`}
+        >
           <div className={styles.marqueeContent}>
             {repeatedBrands.map((brand, index) => (
               <span key={index} className={styles.marqueeItem}>
