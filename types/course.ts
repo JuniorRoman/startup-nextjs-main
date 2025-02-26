@@ -1,3 +1,6 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { ReactNode } from "react";
+
 type Author = {
   name: string;
   image: string;
@@ -13,6 +16,10 @@ type Sidebar = {
 };
 
 export type Course = {
+  authorDesignation: ReactNode;
+  authorName: ReactNode;
+  authorTags: any;
+  authorImage: string | StaticImport;
   id: number;
   title: string;
   subtitle: string;

@@ -252,7 +252,7 @@ const CourseForm = () => {
             <div className="mb-3 flex flex-col">
               <label>Дата</label>
               <input
-                type="date"
+                type="input"
                 name="data"
                 value={course.data}
                 onChange={handleChange}
@@ -263,7 +263,7 @@ const CourseForm = () => {
             <div className="mb-3 flex flex-col">
               <label>Дата публікації</label>
               <input
-                type="date"
+                type="input"
                 name="publishDate"
                 value={course.publishDate}
                 onChange={handleChange}

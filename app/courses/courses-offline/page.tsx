@@ -1,16 +1,40 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Breadcrumb from "@/components/Common/Breadcrumb";
-
-import { Metadata } from "next";
 import OnlineCourses from "@/components/Courses/CoursesInfo";
-import coursesDataOff from "@/components/Courses/coursesDataOff";
 import SingleCourse from "@/components/Courses/SingleCourseOff";
+// import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Courses Page | Free Next.js Template for Startup and SaaS",
-  description: "Сторінка курсів-офлайн",
-};
+// export const metadata: Metadata = {
+//   title: "Courses Page", 
+//   description: "Сторінка курсів-офлайн",
+// };
 
-const Courses = () => {
+export default function Course() {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [views, setViews] = useState(0);
+
+  useEffect(() => {
+    fetch("/api/courses")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Отримані курси:", data);
+        setCourses(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Помилка завантаження курсів:", err);
+        setError("Не вдалося завантажити курси");
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p className="text-center mt-20">Завантаження...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <>
       <Breadcrumb
@@ -29,9 +53,9 @@ const Courses = () => {
               онлайн-курс.
             </span>
           </div>
-
+        
           <div className="-mx-4 flex flex-wrap justify-center">
-            {coursesDataOff.map((cours) => (
+            {courses.map((cours: any) => (
               <div
                 key={cours.id}
                 className="w-full px-4 md:w-2/3 lg:w-1/2 xl:w-1/3"
@@ -41,10 +65,8 @@ const Courses = () => {
             ))}
           </div>
         </div>
-          <OnlineCourses />
+        <OnlineCourses />
       </section>
     </>
   );
-};
-
-export default Courses;
+}

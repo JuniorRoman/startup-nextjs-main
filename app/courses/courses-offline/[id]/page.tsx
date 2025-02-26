@@ -1,11 +1,10 @@
+import { prisma } from '@/lib/prisma';
 import Image from "next/image";
 import TagButton from "@/components/Blog/TagButton";
 import SharePost from "@/components/Blog/SharePost";
 import OfferList from "@/components/Pricing/OfferList";
 import PricingBox from "@/components/Pricing/PricingBox";
 import Suitable from "@/components/Courses/SuitableOffline";
-import coursesData from "@/components/Courses/coursesDataOff";
-
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,31 +12,42 @@ export const metadata: Metadata = {
   description: "Опис курсу - офлайн та його переваги",
 };
 
+export default async function Details({ params }: { params: { id: string } }) {
+  
+  const course = await prisma.course.findFirst({
+    where: { id: params.id },
+    include: { sidebarInformation: true, sidebarDescription: true },
 
-export default function Details({ params }: { params: { id: string } }) {
-  const course = coursesData.find((post) => post.id === Number(params.id));
-
+  });
   return (
     <>
-      <section className="pb-[120px] pt-[150px]">
+      <section className="pb-[120px] pt-[150px] reletive">
+        <div className='absolute left-0 top-20  z-[-1] bg-slate-100 dark:bg-slate-800 w-full h-80'></div>
         <div className="container">
-          <div className="-mx-4 flex flex-wrap justify-center">
-            <div className="w-full px-4 lg:w-8/12">
+          <div className="-mx-2 flex flex-wrap justify-center ">
+            <div className="w-full px-4 lg:w-8/12 ">
               <div>
-                <h1 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight">
+                <h1 className="mb-8 text-2xl md:text-3xl font-bold leading-tight text-black dark:text-white">
                   {course.title}
                 </h1>
-                <div className="mb-10 flex flex-wrap items-center justify-between border-b border-body-color border-opacity-10 pb-4 dark:border-white dark:border-opacity-10">
+                <div className="mb-10 flex flex-wrap items-center justify-between border-b border-body-color border-opacity-10 pb-4 dark:border-opacity-10">
                   <div className="flex flex-wrap items-center">
                     <div className="mb-5 mr-10 flex items-center">
                       <div className="mr-4">
                         <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                          <Image src={course.author.image} alt="author" fill />
+                          <Image
+                            src={course.authorImage}
+                            alt="author"
+                            width={200}
+                            height={200}
+                            className=" object-cover"
+                          />
                         </div>
                       </div>
                       <div className="w-full">
                         <span className="mb-1 text-base font-medium text-body-color">
-                          <span>{course.author.name}</span>
+                          <span className="text-xs ">Author </span>
+                          <span>{course.authorName}</span>
                         </span>
                       </div>
                     </div>
@@ -99,49 +109,39 @@ export default function Details({ params }: { params: { id: string } }) {
                       href="#0"
                       className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
                     >
-                      {course.author.tags[0]}
+                      {course.authorTags[0]}
                     </a>
                   </div>
                 </div>
-                <div>
+                <div className="bg-white p-5 text-body-color dark:bg-gray-dark ">
                   <p className="mb-1 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
                     {course.subtitle}
                   </p>
-                  <p className="mb-10 text-base font-medium leading-relaxed text-body-color dark:text-white sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+
+                  <p className="mb-10 text-base font-medium leading-relaxed text-body-color  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
                     {course.subtitledetail}
                   </p>
                   <div className="mb-10 w-full overflow-hidden rounded">
+                    <p className="mb-5 leading-relaxed sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+                      {course.actualcourse}
+                    </p>
                     <div className="relative aspect-[97/60] w-full sm:aspect-[97/44]">
                       <Image
-                        src="/images/blog/blog-details-01.jpg"
+                        src={course.image}
                         alt="image"
-                        fill
-                        className="h-full w-full object-cover object-center"
+                        width={500}
+                        height={500}
+                        className="h-full w-full object-contain object-center"
                       />
                     </div>
                   </div>
-                  <p className="mb-8 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+                  <p className="mb-8 text-base font-medium leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
                     {course.paragraph}
                   </p>
                   <Suitable />
-                  <p className="mb-5 leading-relaxed text-body-color  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                    {course.actualcourse}
-                  </p>
-                  <h3 className="font-xl mb-10 font-bold leading-tight text-black dark:text-white sm:text-2xl sm:leading-tight lg:text-xl lg:leading-tight xl:text-2xl xl:leading-tight">
-                    Kurs farbowania włosów zawiera:
-                  </h3>
-                  <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                    Kurs farbowania włosów składa się z 9 modułów, każdy
-                    zawierający szczegółowe wykłady oraz testy sprawdzające
-                    Twoją wiedzę.
-                  </p>
-                  <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                    Dostęp do wszystkich modułów i szczegółowy program
-                    znajdziesz w zakładce Wykłady na naszej stronie.
-                  </p>
 
-                  <div className="relative z-10 mb-10 overflow-hidden rounded-md bg-primary bg-opacity-10 p-8 md:p-9 lg:p-8 xl:p-9">
-                    <p className="text-center text-base font-medium italic text-body-color dark:text-gray-400">
+                  <div className="relative z-10 mb-10 overflow-hidden rounded-md bg-indigo-500 bg-opacity-10 p-4 md:p-9 ">
+                    <p className="mb-5 text-center text-base font-medium italic dark:text-slate-400 ">
                       Ми є навчальним закладом, внесеним до Реєстру навчальних
                       закладів під номером: 2.02/00166/2021 на підставі Закону
                       про сприяння зайнятості та установи ринку праці. Ми
@@ -150,58 +150,11 @@ export default function Details({ params }: { params: { id: string } }) {
                       школою, закладом, групою, про які йдеться в ст. 182 Закону
                       про освіту, або іншою формою дошкільної освіти.
                     </p>
-                    {/* <span className="absolute left-0 top-0 z-[-1]">
-                      <svg
-                        width="132"
-                        height="109"
-                        viewBox="0 0 132 109"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          opacity="0.5"
-                          d="M33.0354 90.11C19.9851 102.723 -3.75916 101.834 -14 99.8125V-15H132C131.456 -12.4396 127.759 -2.95278 117.318 14.5117C104.268 36.3422 78.7114 31.8952 63.2141 41.1934C47.7169 50.4916 49.3482 74.3435 33.0354 90.11Z"
-                          fill="url(#paint0_linear_111:606)"
-                        />
-                        <path
-                          opacity="0.5"
-                          d="M33.3654 85.0768C24.1476 98.7862 1.19876 106.079 -9.12343 108.011L-38.876 22.9988L100.816 -25.8905C100.959 -23.8126 99.8798 -15.5499 94.4164 0.87754C87.5871 21.4119 61.9822 26.677 49.5641 38.7512C37.146 50.8253 44.8877 67.9401 33.3654 85.0768Z"
-                          fill="url(#paint1_linear_111:606)"
-                        />
-                        <defs>
-                          <linearGradient
-                            id="paint0_linear_111:606"
-                            x1="94.7523"
-                            y1="82.0246"
-                            x2="8.40951"
-                            y2="52.0609"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="white" stopOpacity="0.06" />
-                            <stop
-                              offset="1"
-                              stopColor="white"
-                              stopOpacity="0"
-                            />
-                          </linearGradient>
-                          <linearGradient
-                            id="paint1_linear_111:606"
-                            x1="90.3206"
-                            y1="58.4236"
-                            x2="1.16149"
-                            y2="50.8365"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="white" stopOpacity="0.06" />
-                            <stop
-                              offset="1"
-                              stopColor="white"
-                              stopOpacity="0"
-                            />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </span> */}
+                    <span>
+                      Суму за навчання можна повернути від уженду праці в
+                      повному обсязі, даний пункт відноситься тільки до навчання
+                      від нашого салону.
+                    </span>
                     <span className="absolute bottom-0 right-0 z-[-1]">
                       <svg
                         width="53"
@@ -292,15 +245,15 @@ export default function Details({ params }: { params: { id: string } }) {
                     </span>
                   </div>
                   <p className="mb-10 text-base font-medium leading-relaxed  sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                    Dołącz do nas i przekonaj się, jak łatwo możesz stać się
-                    mistrzem koloryzacji włosów!
+                    Приєднуйтесь до нас і дізнайтеся, як легко стати майстром
+                    фарбування волосся!
                   </p>
                   <div className="items-center justify-between sm:flex">
                     <div className="mb-5">
                       <h4 className="mb-3 text-sm font-medium text-body-color">
                         Popular Tags :
                       </h4>
-                      <div className="flex items-center">
+                      <div className="flex flex-wrap items-center">
                         <TagButton text="Koloryzacja" />
                         <TagButton text="Fryzjerstwo" />
                         <TagButton text="Rzęsy" />
@@ -321,21 +274,16 @@ export default function Details({ params }: { params: { id: string } }) {
             <div className="w-full px-4 lg:w-4/12">
               <div className="mb-10 mt-12 rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark dark:shadow-none lg:mt-0">
                 <h3 className="border-b border-body-color border-opacity-10 px-8 py-4 text-lg font-semibold uppercase text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  {course.sidebar.title}
+                  {course.sidebarTitle}
                 </h3>
+                <ul className="p-8"></ul>
                 <PricingBox
-                  packageName={course.author.tags[1]}
-                  price={course.sidebar.price}
+                  packageName={course.authorTags[1]}
+                  price={course.sidebarPrice}
                 >
-                  <OfferList text="All UI Components" status="active" />
-                  <OfferList
-                    text="Use with Unlimited Projects"
-                    status="active"
-                  />
-                  <OfferList text="Commercial Use" status="active" />
-                  <OfferList text="Email Support" status="active" />
-                  <OfferList text="Lifetime Access" status="active" />
-                  <OfferList text="Free Lifetime Updates" status="active" />
+                  {course.sidebarDescription.map((item: any) => (
+                    <OfferList text={item.paragraph} status="active" />
+                  ))}
                 </PricingBox>
               </div>
               <div className="mb-10 rounded-sm bg-white shadow-three dark:bg-gray-dark dark:shadow-none">
@@ -343,21 +291,24 @@ export default function Details({ params }: { params: { id: string } }) {
                   Informacje
                 </h3>
                 <ul className="p-8">
-                  {course.sidebar.information.map((info) => (
-                    <li className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10" key={info.name}>
+                  {course.sidebarInformation.map((item: any) => (
+                    <li
+                      className="mb-2 flex items-center justify-between border-b py-2 dark:border-white dark:border-opacity-10"
+                      key={item.name}
+                    >
                       <span className="mr-2 flex">
                         <Image
-                          src={info.image}
-                          alt={info.name}
+                          src={item.image}
+                          alt={item.name}
                           width={20}
                           height={20}
-                          className="bg-white"
+                          className=" dark:bg-white"
                         />
                       </span>
                       <span className="font-medium text-slate-500 dark:text-slate-400">
-                        {info.name}
+                        {item.name}
                       </span>
-                      <span className="ml-auto">{info.quantity}</span>
+                      <span className="ml-auto">{item.quantity}</span>
                     </li>
                   ))}
                 </ul>

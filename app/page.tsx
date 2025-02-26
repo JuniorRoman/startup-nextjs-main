@@ -30,6 +30,7 @@ export default function Home() {
       <Brands />
       <Masters />
       <NewsLatterBox />
+  
       {/* <Video />
       <AboutSectionOne />
       <AboutSectionTwo /> */}

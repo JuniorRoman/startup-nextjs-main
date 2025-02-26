@@ -35,10 +35,10 @@ export async function POST(request) {
         paragraph,
         benefitstitle,
         actualcourse,
-        data: data ? new Date(data) : null,
-        publishDate: publishDate ? new Date(publishDate) : null,
+        data,
+        publishDate,
         sidebarTitle,
-        sidebarPrice: sidebarPrice ? parseFloat(sidebarPrice) : null,
+        sidebarPrice,
         sidebarDescription: sidebarDescription?.length
           ? { create: sidebarDescription }
           : undefined, // 🛠 Фікс sidebarDescription
@@ -60,5 +60,20 @@ export async function POST(request) {
   } catch (error) {
     console.error("Помилка створення курсу:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    // Перевір, чи повертає запит правильні дані
+    const courses = await prisma.course.findMany();
+    console.log("Курси з бази даних:", courses); // Додай лог для перевірки
+    return NextResponse.json(courses);
+  } catch (error) {
+    console.error("Помилка при отриманні курсів з бази:", error);
+    return NextResponse.json(
+      { error: "Помилка отримання курсів" },
+      { status: 500 },
+    );
   }
 }

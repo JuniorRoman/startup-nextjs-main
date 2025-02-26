@@ -18,10 +18,10 @@ model Course {
   suitableFor         SuitableFor[]
   desc                Description[]
   actualcourse        String?
-  data                DateTime?
-  publishDate         DateTime?
+  data                String?
+  publishDate         String?
   sidebarTitle        String?
-  sidebarPrice        Float?
+  sidebarPrice        String
   sidebarDescription  SidebarDescription[]
   sidebarInformation  SidebarInformation[]
   authorName          String?
@@ -67,4 +67,11 @@ model SidebarInformation {
   name      String
   quantity  String
   image     String
+}
+
+model CourseView {
+  id        String   @id @default(uuid())
+  courseId  String   @unique
+  views     Int      @default(0)
+  updatedAt DateTime @updatedAt
 }
