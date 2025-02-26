@@ -282,7 +282,7 @@ export default async function Details({ params }: { params: { id: string } }) {
                   price={course.sidebarPrice}
                 >
                   {course.sidebarDescription.map((item: any) => (
-                    <OfferList text={item.paragraph} status="active" />
+                    <OfferList key={item.id} text={item.paragraph} status="active" />
                   ))}
                 </PricingBox>
               </div>
