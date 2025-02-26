@@ -14,7 +14,7 @@ const Brands = () => {
     <section className="pt-16">
       <div className="container">
         <div
-          className={`${styles.marqueeContainer} bg-gray-light dark:bg-gray-dark`}
+          className={`${styles.marqueeContainer} bg-gradient-to-r from-fuchsia-500 to-cyan-500`}
         >
           <div className={styles.marqueeContent}>
             {repeatedBrands.map((brand, index) => (
